@@ -1,1 +1,1 @@
-# WebGameProgrammingProject
+# Web Game Mid Term
