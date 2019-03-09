@@ -9,7 +9,7 @@ module scenes
         private txtStartButton: objects.Label;
         private hDivider: objects.Image;
         private hDivider2: objects.Image;
-
+        private label1: objects.Label;
         private timer: number = 0;
         private zoomInOut: boolean = false;
 
@@ -30,10 +30,10 @@ module scenes
         
             this.background = new objects.Background(this.assetManager, "background");
            
-            this.startButton = new objects.Button(this.assetManager, "startButton", 1066 * 0.5, 600 * 0.75, true);
+            this.startButton = new objects.Button(this.assetManager, "startButton", 1066 * 0.5, 600 * 0.65, true);
             this.startButton.scaleX = 0.75;
             this.txtStartButton = new objects.Label("PLAY", "20px", "Cambay", "#f7fffd",this.startButton.x,this.startButton.y + 2, true);     
-
+            this.label1 = new objects.Label("Abhi Patel - 300984015", "28px", "Cambay", "#8c8cff", 1066 * 0.5, 600 * 0.1, true);
             this.hDivider = new objects.Image(this.assetManager,"hdivider" ,1066 * 0.5, 600 * 0.3, true);
             this.hDivider.scaleX = 2;
 
@@ -71,7 +71,7 @@ module scenes
             this.addChild(this.gameTitle);
             this.addChild(this.startButton);
             this.addChild(this.txtStartButton);
-            
+            this.addChild(this.label1);
             this.startButton.on("click", this.fn_ButtonClick);
         }
     }

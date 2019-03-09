@@ -19,7 +19,7 @@ module objects {
 
         public Update():void {
             super.Update();
-            this.Move();
+         //   this.Move();
         }        
         
         public Reset():void {}

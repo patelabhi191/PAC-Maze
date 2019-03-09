@@ -12,7 +12,7 @@ module scenes
         private txtButton: objects.Label;
 
         private enemies:objects.Enemy[];        
-
+        
         //private ghost: objects.Enemy;
         private player: objects.Player;
 
@@ -56,7 +56,7 @@ module scenes
             this.enemies = new Array<objects.Enemy>();
 
             objects.Game.keyboard = new managers.Keyboard();
-            var ghost = new objects.Enemy(this.assetManager, "ghost", 550, 245);
+            var ghost = new objects.Enemy(this.assetManager, "ghost", 980, 590);
             ghost.y = ghost.y - ghost.height;
             this.enemies[0] = ghost;
 
@@ -73,11 +73,11 @@ module scenes
             this.txtButton.x = 910;
             this.txtButton.y = 565;  
             
-            
+
             this.player = new objects.Player(this.assetManager);            
-            this.player.boxCollider = new objects.BoxCollider(18, 16, this.player.x, 
+            this.player.boxCollider = new objects.BoxCollider(0, 0, this.player.x, 
                 this.player.y, 
-                this.player.width - 45, this.player.height - 20);
+                this.player.width-10, this.player.height-10);
                 
             this.Main();
 
@@ -139,7 +139,15 @@ module scenes
             
             this.enemies.forEach(enemy => {
                 enemy.Update();
-            });
+
+                this.player.isDead = managers.Collision.CheckDistance(this.player, enemy);
+
+                if(this.player.isDead) {
+                 //   this.backgroundMusic.stop();
+                    objects.Game.currentScene = config.Scene.FINISH;
+                }
+            });   
+        
 
             for(let i = 0; i < this.gameSceneryStaticObjects.length; i++) {
                 var platform = this.gameSceneryStaticObjects[i];
@@ -168,10 +176,10 @@ module scenes
             
             this.CreateScenery();
             this.addChild(this.player);
-         //   this.enemies.forEach(ghost => {
-          //      this.addChild(ghost);  
-          //  });
-
+            this.enemies.forEach(ghost => {
+               this.addChild(ghost);  
+           });
+           
           //  this.addChild(this.background_shadow);
             
             //create the empties gameobjects to be the stage boundaries

@@ -27,7 +27,7 @@ var objects;
         };
         DynamicObject.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.DoGravityEffect();
+            //   this.DoGravityEffect();
             this.Move();
         };
         DynamicObject.prototype.DoGravityEffect = function () {
@@ -50,8 +50,8 @@ var objects;
             return !md.isCollided;
         };
         DynamicObject.prototype.CheckVerticalMovement = function (Check, isUp, speed) {
-            var md = Check(this.x, this.y + (isUp ? speed : 0 - speed));
-            return !md.isCollided || md.closestPointOnBoundsToPoint(math.Vec2.zero).y == 0;
+            var md = Check(this.x, this.y + (isUp ? 0 - speed : speed));
+            return !md.isCollided; //|| md.closestPointOnBoundsToPoint(math.Vec2.zero).y == 0;
         };
         return DynamicObject;
     }(objects.GameObject));

@@ -27,8 +27,11 @@ var objects;
         }
         // Methods / Functions
         Player.prototype.Start = function () {
+            this.isDead = false;
             this.x = 40;
             this.y = 40;
+            this.scaleX = 0.9;
+            this.scaleY = 0.9;
             // this.isJumping = false;      
         };
         Player.prototype.UpdateIfPossible = function (Check) {
@@ -112,26 +115,20 @@ var objects;
                     //this.scaleX *=-1;          
                     this.x -= Player.speed;
                 }
-                if (!this.isLeft) {
-                    this.FlipHorizontally();
-                }
             }
             if (objects.Game.keyboard.moveRight) {
                 if (this.CheckMovement(this.CheckCollision, false, Player.speed)) {
                     this.x += Player.speed;
                 }
-                if (this.isLeft) {
-                    this.FlipHorizontally();
-                }
             }
             if (objects.Game.keyboard.moveUp) {
-                if (this.CheckMovement(this.CheckCollision, true, Player.speed)) {
+                if (this.CheckVerticalMovement(this.CheckCollision, true, Player.speed)) {
                     //this.scaleX *=-1;          
                     this.y -= Player.speed;
                 }
             }
             if (objects.Game.keyboard.moveDown) {
-                if (this.CheckMovement(this.CheckCollision, false, Player.speed)) {
+                if (this.CheckVerticalMovement(this.CheckCollision, false, Player.speed)) {
                     this.y += Player.speed;
                 }
             }

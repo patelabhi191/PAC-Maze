@@ -34,7 +34,7 @@ var scenes;
             this.gameSceneryDynamicObjects = new Array();
             this.enemies = new Array();
             objects.Game.keyboard = new managers.Keyboard();
-            var ghost = new objects.Enemy(this.assetManager, "ghost", 550, 245);
+            var ghost = new objects.Enemy(this.assetManager, "ghost", 980, 590);
             ghost.y = ghost.y - ghost.height;
             this.enemies[0] = ghost;
             console.log("GAME SCENE(S)...");
@@ -47,7 +47,7 @@ var scenes;
             this.txtButton.x = 910;
             this.txtButton.y = 565;
             this.player = new objects.Player(this.assetManager);
-            this.player.boxCollider = new objects.BoxCollider(18, 16, this.player.x, this.player.y, this.player.width - 45, this.player.height - 20);
+            this.player.boxCollider = new objects.BoxCollider(0, 0, this.player.x, this.player.y, this.player.width - 10, this.player.height - 10);
             this.Main();
         };
         StageOne.prototype.CreateFunctionCheck = function (gameObject) {
@@ -88,6 +88,7 @@ var scenes;
             };
         };
         StageOne.prototype.Update = function () {
+            var _this = this;
             this.CheckPaused();
             if (this.isPaused) {
                 return;
@@ -97,6 +98,11 @@ var scenes;
             this.player.UpdateIfPossible(CheckMovement);
             this.enemies.forEach(function (enemy) {
                 enemy.Update();
+                _this.player.isDead = managers.Collision.CheckDistance(_this.player, enemy);
+                if (_this.player.isDead) {
+                    //   this.backgroundMusic.stop();
+                    objects.Game.currentScene = config.Scene.FINISH;
+                }
             });
             for (var i = 0; i < this.gameSceneryStaticObjects.length; i++) {
                 var platform = this.gameSceneryStaticObjects[i];
@@ -108,6 +114,7 @@ var scenes;
             }
         };
         StageOne.prototype.Main = function () {
+            var _this = this;
             this.timeRemaining.fn_TimerTicker(objects.Game.stageTimer);
             //this.addChild(this.background);
             this.addChild(this.background_main);
@@ -118,9 +125,9 @@ var scenes;
             //   this.addChild(this.txtButton);
             this.CreateScenery();
             this.addChild(this.player);
-            //   this.enemies.forEach(ghost => {
-            //      this.addChild(ghost);  
-            //  });
+            this.enemies.forEach(function (ghost) {
+                _this.addChild(ghost);
+            });
             //  this.addChild(this.background_shadow);
             //create the empties gameobjects to be the stage boundaries
             //   this.backButton.on("click", this.fn_ButtonClick);

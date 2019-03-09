@@ -32,7 +32,7 @@ var objects;
         };
         Enemy.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            this.Move();
+            //   this.Move();
         };
         Enemy.prototype.Reset = function () { };
         Enemy.prototype.Move = function () {
