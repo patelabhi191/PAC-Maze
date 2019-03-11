@@ -27,7 +27,9 @@
         { id: "empty", src: "../Assets/Background/empty.png" },
         { id: "crate", src: "../Assets/Sprites/Objects/crate.png" },
         { id: "opened_desk", src: "../Assets/Sprites/Objects/open_desk.png" },
-        { id: "closed_desk", src: "../Assets/Sprites/Objects/closed_desk.png" }
+        { id: "closed_desk", src: "../Assets/Sprites/Objects/closed_desk.png" },
+        { id: "explode", src: "./Assets/Sound/pacman_eatghost.wav" },
+        { id: "play_music", src: "./Assets/Sound/pacman_beginning.wav" }
     ];
     function Init() {
         console.log("Initialization start");

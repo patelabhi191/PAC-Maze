@@ -11,11 +11,17 @@ module scenes
         private txtButton: objects.Label;
         private buttonBlack: objects.Image;
         private blackCover: objects.Image;
+
+        private backgroundMusic:createjs.AbstractSoundInstance;
+        private endMusic:createjs.AbstractSoundInstance;
        
 
         constructor(assetManager: createjs.LoadQueue)
         {
             super(assetManager);
+           // this.backgroundMusic = createjs.Sound.play("play_music");
+            this.endMusic = createjs.Sound.play("explode");
+            this.endMusic.volume = 0.3;
             this.Start();
         }
 
@@ -37,7 +43,7 @@ module scenes
             this.backButton.scaleX = 0.75;
           //  this.buttonBlack = new objects.Image(this.assetManager, "buttonBlack",1066 * 0.5, 600 * 0.9, true);  
           //  this.buttonBlack.scaleX = 1.2;
-            this.label = new objects.Label("Game Over", "bold 96px", "Crackman", "#00adad", 1066 * 0.5, 600 * 0.48, true);
+            this.label = new objects.Label("WiNNer..!", "bold 96px", "Crackman", "#00adad", 1066 * 0.5, 600 * 0.48, true);
             this.label2 = new objects.Label("After eating Pac-Dots, Pacman realised what heaven is...", "28px", "Crackman", "#ffff00", 1066 * 0.5, 600 * 0.6, true);
             this.label3 = new objects.Label("Then he went in search for more pac-dots...", "28px", "Crackman", "#dfdf00", 1066 * 0.5, 600 * 0.65, true);
             this.label4 = new objects.Label("and he met Toru Iwatani of Namco and Rest is HISTORY", "28px", "Crackman", "#bfbf00", 1066 * 0.5, 600 * 0.7, true);

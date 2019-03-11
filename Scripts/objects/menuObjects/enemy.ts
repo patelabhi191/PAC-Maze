@@ -19,14 +19,10 @@ module objects {
 
         public Update():void {
             super.Update();
-         //   this.Move();
+       
         }        
         
         public Reset():void {}
-        public Move():void {
-            this.x -= 3;            
-            if(this.x < 200)
-                this.x = 800;
-        }
+        
     }
 }

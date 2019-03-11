@@ -17,6 +17,9 @@ var scenes;
         __extends(StageOne, _super);
         function StageOne(assetManager) {
             var _this = _super.call(this, assetManager) || this;
+            _this.backgroundMusic = createjs.Sound.play("play_music");
+            _this.backgroundMusic.loop = -1; // Looping forever
+            _this.backgroundMusic.volume = 0.3;
             _this.Start();
             return _this;
         }
@@ -28,13 +31,13 @@ var scenes;
         };
         StageOne.prototype.Start = function () {
             //config.Gravity.gravityFactor = -1;
-            objects.Game.isDebug = true;
+            objects.Game.isDebug = false;
             this.isPaused = false;
             this.gameSceneryStaticObjects = new Array();
             this.gameSceneryDynamicObjects = new Array();
             this.enemies = new Array();
             objects.Game.keyboard = new managers.Keyboard();
-            var ghost = new objects.Enemy(this.assetManager, "ghost", 980, 590);
+            var ghost = new objects.Enemy(this.assetManager, "ghost", 980, 550);
             ghost.y = ghost.y - ghost.height;
             this.enemies[0] = ghost;
             console.log("GAME SCENE(S)...");
@@ -47,7 +50,7 @@ var scenes;
             this.txtButton.x = 910;
             this.txtButton.y = 565;
             this.player = new objects.Player(this.assetManager);
-            this.player.boxCollider = new objects.BoxCollider(0, 0, this.player.x, this.player.y, this.player.width - 10, this.player.height - 10);
+            this.player.boxCollider = new objects.BoxCollider(0, 0, this.player.x, this.player.y, this.player.width - 7, this.player.height - 10);
             this.Main();
         };
         StageOne.prototype.CreateFunctionCheck = function (gameObject) {
@@ -100,7 +103,7 @@ var scenes;
                 enemy.Update();
                 _this.player.isDead = managers.Collision.CheckDistance(_this.player, enemy);
                 if (_this.player.isDead) {
-                    //   this.backgroundMusic.stop();
+                    _this.backgroundMusic.stop();
                     objects.Game.currentScene = config.Scene.FINISH;
                 }
             });
@@ -118,28 +121,11 @@ var scenes;
             this.timeRemaining.fn_TimerTicker(objects.Game.stageTimer);
             //this.addChild(this.background);
             this.addChild(this.background_main);
-            //   this.addChild(this.timeRemaining);
-            //   this.addChild(this.titleShadow);
-            //   this.addChild(this.title);
-            //   this.addChild(this.backButton);
-            //   this.addChild(this.txtButton);
             this.CreateScenery();
             this.addChild(this.player);
             this.enemies.forEach(function (ghost) {
                 _this.addChild(ghost);
             });
-            //  this.addChild(this.background_shadow);
-            //create the empties gameobjects to be the stage boundaries
-            //   this.backButton.on("click", this.fn_ButtonClick);
-            //   var callback = () : void => {
-            //       this.removeChild(this.title);
-            //       this.removeChild(this.titleShadow);
-            //   }
-            //    this.StartCountdown(3, callback);
-            //  this.addChild(this.pauseButton);
-            //   this.addChild(this.pauseTxtButton);
-            //    this.backButton.on("click", this.fn_ButtonClick);
-            //   this.pauseButton.on("click", ()=>{this.isPaused = !this.isPaused; this.fn_pauseButtonClick;});//pause
         };
         StageOne.prototype.CreateScenery = function () {
             //Boundary
@@ -194,7 +180,7 @@ var scenes;
             this.gameSceneryStaticObjects[8] = wall_11;
             wall_11.x = 681;
             wall_11.y = 65;
-            var wall_21 = new objects.EmptyGameObject(this.assetManager, "wall_21", 160, 21);
+            var wall_21 = new objects.EmptyGameObject(this.assetManager, "wall_21", 260, 21);
             this.addChild(wall_21);
             this.gameSceneryStaticObjects[6] = wall_21;
             wall_21.x = 145;
@@ -290,11 +276,11 @@ var scenes;
             this.gameSceneryStaticObjects[24] = stand_5;
             stand_5.x = 520;
             stand_5.y = 220;
-            var stand_6 = new objects.EmptyGameObject(this.assetManager, "stand_6", 21, 320);
+            var stand_6 = new objects.EmptyGameObject(this.assetManager, "stand_6", 18, 380);
             this.addChild(stand_6);
             this.gameSceneryStaticObjects[25] = stand_6;
             stand_6.x = 600;
-            stand_6.y = 220;
+            stand_6.y = 221;
             var stand_7 = new objects.EmptyGameObject(this.assetManager, "stand_7", 21, 240);
             this.addChild(stand_7);
             this.gameSceneryStaticObjects[26] = stand_7;

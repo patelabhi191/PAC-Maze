@@ -32,14 +32,8 @@ var objects;
         };
         Enemy.prototype.Update = function () {
             _super.prototype.Update.call(this);
-            //   this.Move();
         };
         Enemy.prototype.Reset = function () { };
-        Enemy.prototype.Move = function () {
-            this.x -= 3;
-            if (this.x < 200)
-                this.x = 800;
-        };
         return Enemy;
     }(objects.GameObject));
     objects.Enemy = Enemy;
